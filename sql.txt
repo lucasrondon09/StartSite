@@ -1,0 +1,153 @@
+
+TABELA ARTIGO
+CREATE TABLE `admin-site`.`artigos` (
+  `idartigos` INT NOT NULL AUTO_INCREMENT,
+  `titulo` VARCHAR(200) NULL,
+  `subtitulo` VARCHAR(200) NULL,
+  `artigo` LONGTEXT NULL,
+  `datamod` DATE NULL,
+  `st` INT NULL,
+  PRIMARY KEY (`idartigos`));
+ALTER TABLE `admin-site`.`artigos` 
+CHANGE COLUMN `datamod` `datamod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ;
+
+
+
+ALTER TABLE `admin-site`.`artigos` 
+ADD COLUMN `posicao` INT(10) NULL AFTER `artigo`;
+
+=================================================================================================================================================
+
+TABELA IMAGENS
+CREATE TABLE `admin-site`.`imagens` (
+  `idimagens` INT NOT NULL AUTO_INCREMENT,
+  `descricao` VARCHAR(160) NULL,
+  `arquivo` VARCHAR(160) NULL,
+  `alt` VARCHAR(160) NULL,
+  `tamanho` VARCHAR(45) NULL,
+  PRIMARY KEY (`idimagens`));
+
+ALTER TABLE `admin-site`.`imagens` 
+ADD COLUMN `st` INT NULL AFTER `tamanho`;
+
+ALTER TABLE `admin-site`.`imagens` 
+ADD COLUMN `titulo` VARCHAR(160) NULL AFTER `idimagens`;
+
+ALTER TABLE `admin-site`.`imagens` 
+ADD COLUMN `link` VARCHAR(255) NULL AFTER `alt`;
+ALTER TABLE `admin-site`.`imagens` 
+ADD COLUMN `posicao` INT(10) NULL AFTER `link`;
+=================================================================================================================================================
+
+TABELA CONTATOS
+CREATE TABLE `admin-site`.`contatos` (
+  `idcontatos` INT NOT NULL AUTO_INCREMENT,
+  `titulo` LONGTEXT NULL,
+  `contato` LONGTEXT NULL,
+  `datamod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `st` INT NULL,
+  PRIMARY KEY (`idcontatos`));
+
+
+=================================================================================================================================================
+
+
+TABELA GALERIA
+CREATE TABLE `admin-site`.`galeria` (
+  `idgaleria` INT NOT NULL AUTO_INCREMENT,
+  `titulo` VARCHAR(45) NULL,
+  `descricao` LONGTEXT NULL,
+  `capa` VARCHAR(45) NULL,
+  `tamanho` VARCHAR(45) NULL,
+  `datamod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `st` INT NULL,
+  PRIMARY KEY (`idgaleria`));
+
+
+ALTER TABLE `admin-site`.`galeria` 
+ADD COLUMN `views` INT NULL AFTER `st`,
+ADD COLUMN `likes` INT NULL AFTER `views`;
+
+=================================================================================================================================================
+
+
+TABELA GALERIA ITENS
+CREATE TABLE `admin-site`.`galeria_itens` (
+  `idgaleria_itens` INT NOT NULL AUTO_INCREMENT,
+  `galeriaid` INT(11) NULL,
+  `titulo` VARCHAR(45) NULL,
+  `arquivo` VARCHAR(160) NULL,
+  `datamod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `st` INT NULL,
+  PRIMARY KEY (`idgaleria_itens`));
+
+=================================================================================================================================================
+
+TABELA LIKES
+CREATE TABLE `admin-site`.`likes` (
+  `idlikes` INT NOT NULL AUTO_INCREMENT,
+  `user` VARCHAR(160) NULL,
+  `galeria` INT NULL,
+  `foto` INT NULL,
+  `datamod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `st` INT NULL DEFAULT 1,
+  PRIMARY KEY (`idlikes`));
+
+=================================================================================================================================================
+
+
+TABELA USUARIOS
+CREATE TABLE `admin-site`.`usuario` (
+  `idusuario` INT NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(100) NULL,
+  `senha` VARCHAR(255) NULL DEFAULT '7c4a8d09ca3762af61e59520943dc26494f8941b',
+  `nome` VARCHAR(255) NULL,
+  `data_mod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  st int(1) DEFAULT '1',PRIMARY KEY (`idusuario`));
+
+
+ALTER TABLE `admin-site`.`usuario` 
+ADD COLUMN `st` INT(1) NULL DEFAULT 1 AFTER `data_mod`;
+
+
+
+=================================================================================================================================================
+
+TABELA CATEGORIA PRODUTOS
+
+CREATE TABLE `unibrasil`.`produtocategoria` (
+  `idprodutocategoria` INT NOT NULL AUTO_INCREMENT,
+  `produtocategorianome` VARCHAR(100) NULL,
+  `st` INT(1) NULL,
+  `datamod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idprodutocategoria`));
+
+
+
+=================================================================================================================================================
+
+TABELA PRODUTOS
+
+CREATE TABLE `unibrasil`.`produtos` (
+  `idprodutos` INT NOT NULL AUTO_INCREMENT,
+  `produtosnome` VARCHAR(255) NULL,
+  `produtosdescricao` VARCHAR(255) NULL,
+  `produtosespecificacao` VARCHAR(255) NULL,
+  `produtospreco` VARCHAR(45) NULL,
+  `produtosst` INT(1) NULL,
+  `datamod` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `produtoscategoria` INT(11) NULL,
+  PRIMARY KEY (`idprodutos`));
+
+
+ALTER TABLE `unibrasil`.`produtos` 
+ADD COLUMN `foto` VARCHAR(255) NULL AFTER `produtoscategoria`;
+
+
+ALTER TABLE `unibrasil`.`produtos` 
+ADD COLUMN `produtoscategoriadestaque` INT(1) NULL AFTER `foto`;
+
+
+
+ALTER TABLE `unibrasil`.`produtos` 
+CHANGE COLUMN `produtoscategoriadestaque` `produtoscategoriadestaque` INT(1) NULL DEFAULT 0 ;

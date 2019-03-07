@@ -12,6 +12,6 @@ Sistema de gerenciamento de conteúdo de sites.
 
 [Ver o site](http://lucasrondon.com.br/sistemas/startsite.php)
 
-<img src="http://www.lucasrondon.com.br/img/portfolio/thumbnails/startsite.jpg">
+<img src="https://github.com/lucasrondon09/Lucas/blob/master/img/portfolio/thumbnails/startsite.jpg">
 
 
